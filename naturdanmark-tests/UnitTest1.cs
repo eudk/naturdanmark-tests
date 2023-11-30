@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+
 using System;
 
 namespace MusicFrontendTest
@@ -27,7 +28,10 @@ namespace MusicFrontendTest
         [TestMethod]
         public void TestMethodMapPage()
         {
-            _driver.Navigate().GoToUrl("https://mapnaturetest324842390482903.azurewebsites.net/map.html"); // side med frontend
+            _driver.Navigate()
+                .GoToUrl("https://mapnaturetest324842390482903.azurewebsites.net/map.html"); // side med frontend
+            System.Threading.Thread.Sleep(5000);
+
             Assert.AreEqual("NaturDanmark", _driver.Title);
 
             IWebElement observationButton = _driver.FindElement(By.CssSelector("div#buttons-container a.btn-success"));
@@ -35,7 +39,9 @@ namespace MusicFrontendTest
 
             // Wait for the new page 
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            wait.Until(driver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete")); // videre til ny side vent paa at siden er loadet
+            wait.Until(driver =>
+                ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState")
+                .Equals("complete")); // videre til ny side vent paa at siden er loadet
             // 5 sec pause
             System.Threading.Thread.Sleep(5000);
         }
@@ -43,7 +49,7 @@ namespace MusicFrontendTest
         [TestMethod]
         public void TestMethodObservationPage()
         {
-            string expectedTitle = "Ny Observation";
+            string expectedTitle = "New Observation";
             Assert.AreEqual(expectedTitle, _driver.Title);
 
 
@@ -61,7 +67,7 @@ namespace MusicFrontendTest
             // Manual date
             IWebElement dateInput = _driver.FindElement(By.Id("date"));
             dateInput.Clear();
-            dateInput.SendKeys("2023-12-01");
+            dateInput.SendKeys("2023-11-01");
 
             // Manual time
             IWebElement timeInput = _driver.FindElement(By.Id("time"));
@@ -69,29 +75,27 @@ namespace MusicFrontendTest
             timeInput.SendKeys("14:30");
 
 
-            System.Threading.Thread.Sleep(500);
-
-            //
-
-            // problemer efter dette punkt nok APIen eller manglende ID???
+            //  System.Threading.Thread.Sleep(5000);
 
 
-            IWebElement searchButton = _driver.FindElement(By.CssSelector("button[onclick='searchAnimal()']")); // fejl her
+             IWebElement searchButton = _driver.FindElement(By.Id("animalSearchBtn"));
             searchButton.Click();
 
-            System.Threading.Thread.Sleep(5000); // vent paa api
 
-            //  dropdown
-            SelectElement animalDropdown = new SelectElement(_driver.FindElement(By.Id("animalSeen")));
+             System.Threading.Thread.Sleep(5000); // wait for the API
+
+            // dropdown
+             SelectElement animalDropdown = new SelectElement(_driver.FindElement(By.Id("animalSeen")));
             animalDropdown.SelectByIndex(1);
+            IWebElement descriptionTextarea = _driver.FindElement(By.Id("note"));
+            descriptionTextarea.SendKeys("UI test, this Observation can be deleted! (Selenium)");
 
             // Submit form
-            IWebElement submitButton = _driver.FindElement(By.CssSelector("button[type='submit']"));
+            IWebElement submitButton = _driver.FindElement(By.Id("submitBtn"));
             submitButton.Click();
-
 
             Console.WriteLine("Test completed.");
         }
-
     }
 }
+
