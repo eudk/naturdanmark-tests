@@ -1,6 +1,5 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
+﻿using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace naturdanmark_tests
 {
-    public class UnitTestRead
+    public class UnitTestReadList
     {
         private static readonly string DriverDirectory = "C:\\webdrivers";
         private static IWebDriver _driver;
@@ -30,7 +29,7 @@ namespace naturdanmark_tests
         [TestMethod]
         public void ReadPageList()
         {
-            _driver.Navigate().GoToUrl("https://mapnaturetest324842390482903.azurewebsites.net/list/read/read.html");
+            _driver.Navigate().GoToUrl("https://mapnaturetest324842390482903.azurewebsites.net/list/list.html");
             string theTitle = "The observation";
             Assert.AreEqual(theTitle, _driver.Title);
 
@@ -49,5 +48,5 @@ namespace naturdanmark_tests
 
             System.Threading.Thread.Sleep(5000);
         }
-    }   
+    }
 }
