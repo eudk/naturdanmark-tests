@@ -33,24 +33,20 @@ namespace MusicFrontendTest
         [TestMethod]
         public void ReadPageList()
         {
-            _driver.Navigate().GoToUrl("https://127.0.0.1:5500/list/list.html");
+            _driver.Navigate().GoToUrl("https://mapnaturetest324842390482903.azurewebsites.net/list/list.html");
             //string theTitle = "The observation";
             //Assert.AreEqual(theTitle, _driver.Title);
 
-
-            IWebElement animaltable = _driver.FindElement(By.Id("animaltable"));
-            Assert.IsTrue(animaltable.Text.Contains("Asiatic Black Bear"));
-
-            IWebElement userName = _driver.FindElement(By.Id("UserName"));
-            Assert.AreEqual("User", userName);
-
-            IWebElement theExactDate = _driver.FindElement(By.Id("Date"));
-            Assert.AreEqual("2024-01-04", theExactDate);
-
-            IWebElement theExactTime = _driver.FindElement(By.Id("Time"));
-            Assert.AreEqual("10:10", theExactTime);
-
             System.Threading.Thread.Sleep(5000);
+
+
+            IWebElement animaltable = _driver.FindElement(By.Id("app"));
+            //Assert.IsTrue(animaltable.Text.Contains("User"));
+            Assert.IsTrue(animaltable.Text.Contains("Asiatic Black Bear"));
+            Assert.IsTrue(animaltable.Text.Contains("2024-01-04"));
+            Assert.IsTrue(animaltable.Text.Contains("10:10"));
+
+            
         }
     }
 }

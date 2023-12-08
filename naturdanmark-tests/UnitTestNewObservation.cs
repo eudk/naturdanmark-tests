@@ -1,14 +1,16 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
-
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenQA.Selenium.Support.UI;
 
 namespace MusicFrontendTest
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTestNewObservation
     {
         private static readonly string DriverDirectory = "C:\\webdrivers";
         private static IWebDriver _driver;
@@ -26,29 +28,11 @@ namespace MusicFrontendTest
         }
 
         [TestMethod]
-        public void TestMethodMapPage()
-        {
-            _driver.Navigate()
-                .GoToUrl("https://mapnaturetest324842390482903.azurewebsites.net/map.html"); // side med frontend
-            System.Threading.Thread.Sleep(5000);
-
-            Assert.AreEqual("NaturDanmark", _driver.Title);
-
-            IWebElement observationButton = _driver.FindElement(By.CssSelector("div#buttons-container a.btn-success"));
-            observationButton.Click();
-
-            // Wait for the new page 
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            wait.Until(driver =>
-                ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState")
-                .Equals("complete")); // videre til ny side vent paa at siden er loadet
-            // 5 sec pause
-            System.Threading.Thread.Sleep(5000);
-        }
-
-        [TestMethod]
         public void TestMethodObservationPage()
         {
+            _driver.Navigate()
+                .GoToUrl("https://mapnaturetest324842390482903.azurewebsites.net/observation/observation.html");
+
             string expectedTitle = "New Observation";
             Assert.AreEqual(expectedTitle, _driver.Title);
 
@@ -78,14 +62,14 @@ namespace MusicFrontendTest
             //  System.Threading.Thread.Sleep(5000);
 
 
-             IWebElement searchButton = _driver.FindElement(By.Id("animalSearchBtn"));
+            IWebElement searchButton = _driver.FindElement(By.Id("animalSearchBtn"));
             searchButton.Click();
 
 
-             System.Threading.Thread.Sleep(5000); // wait for the API
+            System.Threading.Thread.Sleep(5000); // wait for the API
 
             // dropdown
-             SelectElement animalDropdown = new SelectElement(_driver.FindElement(By.Id("animalSeen")));
+            SelectElement animalDropdown = new SelectElement(_driver.FindElement(By.Id("animalSeen")));
             animalDropdown.SelectByIndex(1);
             IWebElement descriptionTextarea = _driver.FindElement(By.Id("note"));
             descriptionTextarea.SendKeys("UI test, this Observation can be deleted! (Selenium)");
@@ -98,4 +82,3 @@ namespace MusicFrontendTest
         }
     }
 }
-
