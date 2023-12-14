@@ -1,8 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Support.UI;
 
 using System;
@@ -18,8 +18,8 @@ namespace MusicFrontendTest
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            _driver = new FirefoxDriver(DriverDirectory);
-            //_driver = new ChromeDriver(DriverDirectory);
+            _driver = new ChromeDriver(DriverDirectory);
+            //_driver = new FirefoxDriver(DriverDirectory);
             //_driver = new EdgeDriver(DriverDirectory); 
         }
 

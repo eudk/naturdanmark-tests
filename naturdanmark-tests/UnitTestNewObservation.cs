@@ -1,5 +1,7 @@
-﻿using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +20,9 @@ namespace MusicFrontendTest
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            _driver = new FirefoxDriver(DriverDirectory);
+            _driver = new ChromeDriver(DriverDirectory);
+            //_driver = new FirefoxDriver(DriverDirectory);
+            //_driver = new EdgeDriver(DriverDirectory);
         }
 
         [ClassCleanup]
