@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 
-namespace MusicFrontendTest
+namespace NaturDanmark
 {
     [TestClass]
     public class UnitTestNewObservation

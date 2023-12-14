@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.UI;
 
 using System;
 
-namespace MusicFrontendTest
+namespace NaturDanmark
 {
     [TestClass]
     public class UnitTestMap

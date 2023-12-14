@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicFrontendTest
+namespace NaturDanmark
 {
     [TestClass]
     public class UnitTestListObservation
